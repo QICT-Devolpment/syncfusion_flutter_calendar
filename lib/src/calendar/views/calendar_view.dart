@@ -18,6 +18,7 @@ import '../appointment_layout/allday_appointment_layout.dart';
 import '../appointment_layout/appointment_layout.dart';
 import '../common/calendar_controller.dart';
 import '../common/calendar_view_helper.dart';
+import '../common/calendar_view_helper.dart' as common_view_helper;
 import '../common/date_time_engine.dart';
 import '../common/enums.dart';
 import '../resource_view/calendar_resource.dart';
@@ -2967,8 +2968,8 @@ class _CalendarViewState extends State<_CalendarView>
   late double _timeIntervalHeight;
   UpdateCalendarStateDetails _updateCalendarStateDetails =
       UpdateCalendarStateDetails();
-  ValueNotifier<SelectionDetails?> _allDaySelectionNotifier =
-      ValueNotifier<SelectionDetails?>(null);
+  ValueNotifier<common_view_helper.SelectionDetails?> _allDaySelectionNotifier =
+      ValueNotifier<common_view_helper.SelectionDetails?>(null);
   late ValueNotifier<Offset?> _viewHeaderNotifier;
   ValueNotifier<Offset?> _calendarCellNotifier = ValueNotifier<Offset?>(null),
       _allDayNotifier = ValueNotifier<Offset?>(null),
@@ -3130,7 +3131,8 @@ class _CalendarViewState extends State<_CalendarView>
     /// select the same month cell and move to day view then the view show
     /// calendar cell selection and all day panel selection.
     if (oldWidget.view != widget.view) {
-      _allDaySelectionNotifier = ValueNotifier<SelectionDetails?>(null);
+      _allDaySelectionNotifier =
+          ValueNotifier<common_view_helper.SelectionDetails?>(null);
       final DateTime today = DateTime.now();
       _currentTimeNotifier = ValueNotifier<int>(
           (today.day * 24 * 60) + (today.hour * 60) + today.minute);
@@ -4652,7 +4654,8 @@ class _CalendarViewState extends State<_CalendarView>
       return;
     }
 
-    _allDaySelectionNotifier.value = SelectionDetails(view, date);
+    _allDaySelectionNotifier.value =
+        common_view_helper.SelectionDetails(view, date);
   }
 
   //// Handles the onTap callback for day view cells, all day panel, and view

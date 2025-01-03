@@ -7,6 +7,8 @@ import 'package:syncfusion_flutter_core/theme.dart';
 
 import '../appointment_engine/appointment_helper.dart';
 import '../common/calendar_view_helper.dart';
+
+import '../common/calendar_view_helper.dart' as common_view_helper;
 import '../common/date_time_engine.dart';
 import '../common/enums.dart';
 import '../common/event_args.dart';
@@ -50,7 +52,7 @@ class AllDayAppointmentLayout extends StatefulWidget {
 
   /// Holds the selection details and user to trigger repaint to draw the
   /// selection.
-  final ValueNotifier<SelectionDetails?> repaintNotifier;
+  final ValueNotifier<common_view_helper.SelectionDetails?> repaintNotifier;
 
   /// Used to get the calendar state details.
   final UpdateCalendarState updateCalendarState;
@@ -440,7 +442,7 @@ class _AllDayAppointmentRenderWidget extends MultiChildRenderObjectWidget {
   final CalendarView view;
   final List<DateTime> visibleDates;
   final List<CalendarAppointment>? visibleAppointments;
-  final ValueNotifier<SelectionDetails?> repaintNotifier;
+  final ValueNotifier<common_view_helper.SelectionDetails?> repaintNotifier;
   final double timeLabelWidth;
   final double allDayPainterHeight;
   final bool isRTL;
@@ -742,11 +744,13 @@ class _AllDayAppointmentRenderObject extends RenderBox
     _allDayHoverPosition.addListener(markNeedsPaint);
   }
 
-  ValueNotifier<SelectionDetails?> _selectionNotifier;
+  ValueNotifier<common_view_helper.SelectionDetails?> _selectionNotifier;
 
-  ValueNotifier<SelectionDetails?> get selectionNotifier => _selectionNotifier;
+  ValueNotifier<common_view_helper.SelectionDetails?> get selectionNotifier =>
+      _selectionNotifier;
 
-  set selectionNotifier(ValueNotifier<SelectionDetails?> value) {
+  set selectionNotifier(
+      ValueNotifier<common_view_helper.SelectionDetails?> value) {
     if (_selectionNotifier == value) {
       return;
     }
@@ -1288,7 +1292,7 @@ class _AllDayAppointmentRenderObject extends RenderBox
   /// Used to pass the argument of create box painter and it is called when
   /// decoration have asynchronous data like image.
   void _updateSelectionDecorationPainter() {
-    selectionNotifier.value = SelectionDetails(
+    selectionNotifier.value = common_view_helper.SelectionDetails(
         selectionNotifier.value!.appointmentView,
         selectionNotifier.value!.selectedDate);
   }
